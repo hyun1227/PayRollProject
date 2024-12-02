@@ -2,7 +2,7 @@ import java.util.List;
 
 public class InputView {
 
-    public List<UserPayInfo> getUserPayInfosFromUserAction() {
+    public List<UserPayInfo> getUserPayInfosFromFile() {
         return null;
     }
 

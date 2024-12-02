@@ -11,7 +11,7 @@ public class PayRollMachine {
     }
 
     public void run() {
-        List<UserPayInfo> payInfos = inputView.getUserPayInfosFromUserAction();
+        List<UserPayInfo> payInfos = inputView.getUserPayInfosFromFile();
 
         TaxCalculate taxCalculate = new TaxCalculate(payInfos);
         List<FinalUserPayInfo> finalPayInfos = taxCalculate.calculate();
