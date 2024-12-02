@@ -1,4 +1,4 @@
-public class FreelancerTaxCalculateProvider implements TaxCalculateProvider {
+public class FreelancerTaxCalculateProvider {
 
     private static final double TAX_PERCENT = 3.3;
 

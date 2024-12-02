@@ -41,4 +41,5 @@ public class UserPayInfo {
     private double calculateSubtractAmount(double totalAmount, double subtractedAmount) {
         return totalAmount - subtractedAmount;
     }
+
 }

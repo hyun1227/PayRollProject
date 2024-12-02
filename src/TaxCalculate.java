@@ -3,8 +3,8 @@ import java.util.List;
 
 public class TaxCalculate {
 
-    private static final TaxCalculateProvider FREELANCER_TAX_CALCULATE_PROVIDER = new FreelancerTaxCalculateProvider();
-    private static final TaxCalculateProvider FOUR_INSURANCE_TAX_CALCULATE_PROVIDER = new FourInsuranceTaxCalculateProvider();
+    private static final FreelancerTaxCalculateProvider FREELANCER_TAX_CALCULATE_PROVIDER = new FreelancerTaxCalculateProvider();
+    private static final FourInsuranceTaxCalculateProvider FOUR_INSURANCE_TAX_CALCULATE_PROVIDER = new FourInsuranceTaxCalculateProvider();
 
     private final List<UserPayInfo> payInfos;
 

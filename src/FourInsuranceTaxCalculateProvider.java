@@ -1,4 +1,4 @@
-public class FourInsuranceTaxCalculateProvider implements TaxCalculateProvider {
+public class FourInsuranceTaxCalculateProvider {
 
     private final static NationalPensionCalculator NATIONAL_PENSION_CALCULATOR = new NationalPensionCalculator();
     private final static HealthInsuranceCalculator HEALTH_INSURANCE_CALCULATOR = new HealthInsuranceCalculator();
