@@ -12,4 +12,12 @@ public class FinalUserPayInfo {
         return new FinalUserPayInfo(name, amount);
     }
 
+    @Override
+    public String toString() {
+        return "FinalUserPayInfo{" +
+                "name='" + name + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
+
 }

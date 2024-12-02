@@ -1,15 +1,21 @@
 public class UserPayInfo {
 
+    public static final int PERCENT_UNIT = 100;
+
     private final String name;
     private final double amountPerHour;
     private final double workedTime;
-    private final boolean freelancer;
+    private final boolean isFreelancer;
 
-    public UserPayInfo(String name, double amountPerHour, double workedTime, boolean freelancer) {
+    public UserPayInfo(String name, double amountPerHour, double workedTime, boolean isFreelancer) {
         this.name = name;
         this.amountPerHour = amountPerHour;
         this.workedTime = workedTime;
-        this.freelancer = freelancer;
+        this.isFreelancer = isFreelancer;
+    }
+
+    public static UserPayInfo of(String name, double amountPerHour, double workedTime, boolean freelancer) {
+        return new UserPayInfo(name, amountPerHour, workedTime, freelancer);
     }
 
     public FinalUserPayInfo subtractInsuranceAmount(double subtractedAmount) {
@@ -20,8 +26,12 @@ public class UserPayInfo {
         return FinalUserPayInfo.of(name, subtractedTotalAmount);
     }
 
+    public double calculateInsuranceAmount(double taxPercent) {
+        return calculateTotalAmount() * taxPercent / PERCENT_UNIT;
+    }
+
     public boolean isFreelancer() {
-        return freelancer;
+        return isFreelancer;
     }
 
     private double calculateTotalAmount() {
@@ -31,5 +41,4 @@ public class UserPayInfo {
     private double calculateSubtractAmount(double totalAmount, double subtractedAmount) {
         return totalAmount - subtractedAmount;
     }
-
 }

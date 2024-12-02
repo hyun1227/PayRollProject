@@ -1,7 +1,9 @@
 public class NationalPensionCalculator {
 
+    private final static double TAX_PERCENT = 4.5;
+
     public double calculate(UserPayInfo payInfo) {
-        return 0;
+        return payInfo.calculateInsuranceAmount(TAX_PERCENT);
     }
 
 }
