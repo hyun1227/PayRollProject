@@ -3,6 +3,7 @@ import java.util.List;
 public class InputView {
 
     public List<UserPayInfo> getUserPayInfosFromFile() {
+        int a = 0;
         return null;
     }
 
