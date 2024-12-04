@@ -1,65 +1,64 @@
 import java.util.*;
+import java.io.*;
 
 public class InputView {
     private BufferedReader infile;
-    private final String EOF="!";
-    private String name;
-    private double hours,payrate;
-    private int insurance;
+    private final String EOF = "!";
 
-
-    public InputView(String file_name){
-        try{
-            infile=new BufferedReader(new FileReader(file_name));
-        }
-        catch (Exception e){
-            System.out.println("PayrollReader Error bad file_name")
-        }
-    }
-
-    public boolean getNextRecord(){
-        boolean result =false;
-        try{
-            if(infile.ready()){
-                String line=infile.readLine();
-                StringTokenizer t=new StringTokenizer(line,",");
-                String s=t.nextToken().trim();
-                if (!EOF.equals(s)) {
-                    if (t.countTokens() == 3) {
-                        name = s;
-                        hours = Double.parseDouble(t.nextToken().trim());
-                        payrate = Double.parseDouble(t.nextToken().trim());
-                        insurance=Integer.parseInt(t.nextToken().trim())
-                        result = true;
-                    } else {
-                        throw new RuntimeException(line);
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println("PayrollReader Error : " + e.getMessage());
-            }
-            catch (RuntimeException e) {
-                System.out.println("PayrollReader Error - bad record format: " + e.getMessage() + " Skipping");
-                result = getNextRecord(); // 다음 줄 시도
-            }
-            return result;
-
-
-                }
+    public InputView(String fileName) {
+        try {
+            infile = new BufferedReader(new FileReader(fileName));
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File not found - " + fileName);
         }
     }
 
     public List<UserPayInfo> getUserPayInfosFromFile() {
-        ArrayList<UserPayInfo> arr=new ArrayList<>():
-        arr.add(name);
-        arr.add(hours);
-        arr.add(payrate);
-        if insurance==1
-            arr.add(true);
-        else
-            arr.add(false);
+        List<UserPayInfo> userPayInfos = new ArrayList<>();
 
+        if (infile == null) {
+            System.out.println("Error: Input file not initialized.");
+            return userPayInfos;
+        }
+
+        try {
+            String line;
+            while ((line = infile.readLine()) != null) {
+                if (EOF.equals(line.trim())) {
+                    break;
+                }
+
+                StringTokenizer tokenizer = new StringTokenizer(line, ",");
+                if (tokenizer.countTokens() != 4) {
+                    System.out.println("Invalid record format: " + line);
+                    continue;
+                }
+
+                try {
+                    String name = tokenizer.nextToken().trim();
+                    double amountPerHour = Double.parseDouble(tokenizer.nextToken().trim());
+                    double workedTime = Double.parseDouble(tokenizer.nextToken().trim());
+                    boolean isFreelancer = Integer.parseInt(tokenizer.nextToken().trim()) == 1;
+
+                    userPayInfos.add(UserPayInfo.of(name,workedTime,amountPerHour,isFreelancer));
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid number format in record: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        } finally {
+            try {
+                infile.close();
+            } catch (IOException e) {
+                System.out.println("Error closing file: " + e.getMessage());
+            }
+        }
+
+        return userPayInfos;
     }
+}
+
 //1이면 적용자
 //    public List<UserPayInfo> getUserPayInfosFromUserAction() {
 //        return List.of(
@@ -69,4 +68,4 @@ public class InputView {
 //        );
 //    }
 
-}
+
